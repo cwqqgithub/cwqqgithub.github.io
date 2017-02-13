@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			section {
+				width: 900px;
+				height: 900px;
+				border: 1px solid seagreen;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+			}
+			
+			section div {
+				text-align: center;
+				line-height: 300px;
+				width: calc(900px / 3);
+				height: calc(900px / 3);
+				border: 1px solid gold;
+				box-sizing: border-box;
+				cursor: pointer;
+				background-color: royalblue;
+				font-size: 50px;
+			}
+			
+			.move {
+				background: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<section>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div class="move">啊哈哈哈</div>
+		</section>
+		<button style="float: right;">点击交换</button>
+	</body>
+
+</html>
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var array=[1,2,3,4,5,6,7,8];
+var a =0;
+for (var i = 0; i < array.length+a; i++) {
+	var index = Math.floor(Math.random()*array.length);
+	var B=array[index];
+	var C= del(array,B);
+		if(C){	
+			a++;
+			$('div').eq(i).text(B);
+		}	
+}
+	var Text = $('.move').text();
+	$('section').on('click', 'div', function() {
+		var count=0;
+		if($(this).prev().is('.move')||$(this).next().is('.move')){
+			if(!((($(this).index()==2 && $('.move').index()==3)||($(this).index()==3 && $('.move').index()==2))||(($(this).index()==5 && $('.move').index()==6)||($(this).index()==6 && $('.move').index()==5)))){
+				var text = $(this).text()
+				$('.move').text(text);
+				$('div').removeClass('move');
+				$(this).addClass('move');
+				$(this).text(Text);
+			}
+		}	
+		if($(this).prev().prev().prev().is($('.move')) || $(this).next().next().next().is($('.move'))) {
+			var text = $(this).text()
+			$('.move').text(text);
+			$('div').removeClass('move');
+			$(this).addClass('move');
+			$(this).text(Text);
+		}
+		$('div').each(function(index){
+	
+		if($('div').eq(index).text()==index+1){
+			count++
+		}
+		if(count==8){
+			alert('恭喜你成功了！');
+		}
+	})
+		
+	});
+	
+	$('button').click(function(){
+		var text1 =$('div').eq(6).text();
+		var text2 =$('div').eq(7).text();
+		$('div').eq(6).text(text2);
+		$('div').eq(7).text(text1);
+	});
+	
+function del(arra,val){
+	for (var i = 0; i < arra.length; i++) {
+		  if(val==arra[i]){
+		  	arra.splice(i,1);
+		  	return true;
+		  }
+	}
+}
+</script>

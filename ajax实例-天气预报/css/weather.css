@@ -1,0 +1,51 @@
+html,body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	background-image: linear-gradient(to bottom,#0E69BC,#69A7DD);
+	color: white;
+}
+header{
+	text-align: center;
+	font-size: 22px;
+	line-height: 50px;
+}
+main{
+	text-align: center;
+}
+main .icon{
+	background-image: url(../qing.png);
+	background-repeat: no-repeat;
+	/*background-position: center;*/
+	background-size: 100% 100%;
+	margin: 0 auto;
+	width: 128px;
+	height: 128px;
+}
+footer{
+	width: 90%;
+	text-align: center;
+	margin: 20px auto;
+}
+section{
+	width: 33.33%;
+	float: left;
+	border-right: 1px solid #AAAAFF;
+	box-sizing: border-box;
+}
+section:last-child{
+	border: none;
+}
+section .icon{
+	height: 60px;
+	width: 60px;
+	background-image: url(../qing.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	margin: 0 auto;
+}
+
+
+
+

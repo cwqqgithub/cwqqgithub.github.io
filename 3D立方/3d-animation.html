@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+
+			html{
+				height: 100%;
+			}
+			body{
+				height: 100%;
+				margin: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				perspective: 1000px;
+			}
+			#box{
+				/*border: solid 2px red;*/
+				position: relative;
+				width: 300px;
+				height: 300px;
+				/*transform: rotateX(180deg) rotateZ(180deg);*/
+				transform-style: preserve-3d;
+			}
+			.pic{
+				width: 300px;
+				height: 300px;
+				border: solid 1px black;
+				position: absolute;
+				background-size: contain;
+			}
+			
+			#p1{
+				background-image: url(img/1.jpg);
+				transform: translateZ(-150px) rotateY(180deg);
+			}
+			#p2{
+				background-image: url(img/2.jpg);
+				transform: translateY(-150px) rotateX(90deg);
+			}
+			#p3{
+				background-image: url(img/3.jpg);
+				transform: translateX(-150px) rotateY(-90deg);
+			}
+			#p4{
+				background-image: url(img/4.jpg);
+				transform: translateX(150px) rotateY(90deg);
+			}
+			#p5{
+				background-image: url(img/5.jpg);
+				transform: translateY(150px) rotateX(-90deg);
+			}
+			#p6{
+				background-image: url(img/6.jpg);
+				transform: translateZ(150px);
+			}
+			
+		</style>
+	</head>
+	<body>
+		<section id="box">
+			<div class="pic" id="p1"></div>
+			<div class="pic" id="p2"></div>
+			<div class="pic" id="p3"></div>
+			<div class="pic" id="p4"></div>
+			<div class="pic" id="p5"></div>
+			<div class="pic" id="p6"></div>
+		</section>
+	</body>
+	<script src="jquery/jquery.min.js"></script>	
+	<script>
+		
+		//记录当前盒子的旋转角度
+		var xAngle = 0;
+		var yAngle = 0;
+		
+		//记录鼠标点下时的坐标
+		var xPoint = 0;
+		var yPoint = 0;
+		
+		//记录鼠标是否点下
+		var isMouseDown = false;
+		
+		$("body").mousedown(function(e){
+			e.preventDefault();
+			isMouseDown = true;
+			xPoint = e.pageX;
+			yPoint = e.pageY;
+		});
+		
+		
+		var lastXP = 0;
+		var lastYP = 0;
+		
+		$("body").mousemove(function(e){
+			if(isMouseDown){
+				
+				lastXP = e.pageX;
+				lastYP = e.pageY;
+				
+				var xOffset = e.pageX-xPoint;
+				var yOffset = e.pageY-yPoint;
+				
+				var cax = xAngle-yOffset/4;
+				var cay = yAngle+xOffset/4;
+				
+				$("#box")
+				.css("transform","rotateX("+cax+"deg) rotateY("+cay+"deg)");
+				
+			}
+		});
+		
+
+		$("body").mouseup(function(e){
+			isMouseDown = false;
+			
+			var xOffset = e.pageX-xPoint;
+			var yOffset = e.pageY-yPoint;
+			
+			xAngle -= yOffset/4;
+			yAngle += xOffset/4;
+			
+		});
+		
+	</script>
+	
+	
+</html>
